@@ -132,32 +132,44 @@ public class Hospital {
     }
 
     public static void main(String[] args) {
-        String patientID = JOptionPane.showInputDialog("Enter patient identification number:");
+        String patientID = JOptionPane.showInputDialog("Enter patient ID:");
 
-        if (patientID == null || patientID.length() < 5) {
+        if (patientID.length() < 5) {
             JOptionPane.showMessageDialog(null,
                     "Invalid ID. Please provide a valid ID with a minimum length of 5 characters.");
-            return; // Stop execution if ID is invalid
+            return;
         }
         String FirstName = JOptionPane.showInputDialog("Enter patient's first name:");
 
-        if (FirstName == null || FirstName.isEmpty()) {
+        if (FirstName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Patient name cannot be empty. Please provide a first name.");
-            return; // Stop execution if last name is empty
+            return;
         }
 
         String LastName = JOptionPane.showInputDialog("Enter patient's Surname:");
 
-        if (FirstName == null || FirstName.isEmpty()) {
+        if (FirstName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Patient name cannot be empty. Please provide a last name.");
-            return; // Stop execution if last name is empty
+            return;
         }
 
         int numberOfDays = Integer
                 .parseInt(JOptionPane.showInputDialog("Enter number of days the patient is in the hospital:"));
+
+        if (numberOfDays < 0) {
+            JOptionPane.showMessageDialog(null, "Number of days cannot be empty. Please provide a valid number.");
+
+        }
+
         String typeOfRoomInput = JOptionPane
                 .showInputDialog("Enter room type (P = private, S = semi-private, W = ward):");
         char typeOfRoom = typeOfRoomInput.charAt(0);
+
+        if (typeOfRoomInput.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Please provide a room type. P (Private), S (Semi-Private), or W (Ward)", typeOfRoomInput,
+                    typeOfRoom);
+        }
 
         Hospital hospital = new Hospital(patientID, FirstName, LastName, numberOfDays, typeOfRoom);
         hospital.printBillingStatement();
